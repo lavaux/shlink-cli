@@ -1,5 +1,7 @@
 # shlink-cli
 
+DISCLAIMER: heavily relies on AI generation
+
 A command-line client for [Shlink](https://shlink.io), the self-hosted URL shortener.
 
 ## Features
