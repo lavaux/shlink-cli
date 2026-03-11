@@ -9,7 +9,6 @@ type ShortURL struct {
 	ShortURL    string            `json:"shortUrl"`
 	LongURL     string            `json:"longUrl"`
 	DateCreated string            `json:"dateCreated"`
-	VisitCount  int               `json:"visitsSummary,omitempty"`
 	Tags        []string          `json:"tags"`
 	Meta        ShortURLMeta      `json:"meta"`
 	Domain      *string           `json:"domain"`
