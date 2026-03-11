@@ -1,0 +1,48 @@
+# ── Compiled binaries ──────────────────────────
+bin/
+dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# ── Build artefacts ────────────────────────────
+*.o
+*.a
+*.test
+
+# ── Coverage / profiling ───────────────────────
+coverage.out
+coverage.html
+*.prof
+*.pprof
+cpu.out
+mem.out
+
+# ── Go workspace & vendor (optional) ──────────
+vendor/
+go.work
+go.work.sum
+
+# ── IDE / editor ───────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── Environment / secrets ─────────────────────
+.env
+.env.*
+*.local
+!.env.example
+
+# ── golangci-lint cache ────────────────────────
+.golangci-lint/
+
+# ── Temporary files ────────────────────────────
+tmp/
+*.tmp
