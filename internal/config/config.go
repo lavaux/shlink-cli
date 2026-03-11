@@ -47,10 +47,10 @@ func (c *Config) Merge(server, apiKey, output, version string) {
 // Validate checks that required fields are set.
 func (c *Config) Validate() error {
 	if c.ServerURL == "" {
-		return fmt.Errorf("Shlink server URL is required (set SHLINK_SERVER or use --server)")
+		return fmt.Errorf("shlink server URL is required (set SHLINK_SERVER or use --server)")
 	}
 	if c.APIKey == "" {
-		return fmt.Errorf("Shlink API key is required (set SHLINK_API_KEY or use --api-key)")
+		return fmt.Errorf("shlink API key is required (set SHLINK_API_KEY or use --api-key)")
 	}
 	c.ServerURL = strings.TrimRight(c.ServerURL, "/")
 	return nil

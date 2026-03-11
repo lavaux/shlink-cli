@@ -7,6 +7,7 @@ import (
 
 	"github.com/lavaux/shlink-cli/cmd/shlink/commands"
 	"github.com/lavaux/shlink-cli/internal/config"
+
 	"github.com/spf13/cobra"
 )
 

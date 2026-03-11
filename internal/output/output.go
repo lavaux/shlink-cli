@@ -14,8 +14,11 @@ import (
 type Format string
 
 const (
+	// FormatTable renders output as a formatted table.
 	FormatTable Format = "table"
-	FormatJSON  Format = "json"
+	// FormatJSON renders output as a JSON object.
+	FormatJSON Format = "json"
+	// FormatPlain renders output as plain text.
 	FormatPlain Format = "plain"
 )
 
@@ -23,6 +26,26 @@ const (
 type Printer struct {
 	Format Format
 	Out    io.Writer
+}
+
+// safeFprintln writes a line and prints error to stderr if it fails.
+func safeFprintln(w io.Writer, a ...interface{}) {
+	if _, err := fmt.Fprintln(w, a...); err != nil {
+		fmt.Fprintf(os.Stderr, "output error: %v\n", err)
+	}
+}
+
+// safeFprintln writes a line and prints error to stderr if it fails.
+func safeFprintf(w io.Writer, format string, a ...interface{}) {
+	if _, err := fmt.Fprintf(w, format, a...); err != nil {
+		fmt.Fprintf(os.Stderr, "output error: %v\n", err)
+	}
+}
+
+func safeFlush(w *tabwriter.Writer) {
+	if err := w.Flush(); err != nil {
+		fmt.Fprintf(os.Stderr, "flush error: %v\n", err)
+	}
 }
 
 // New creates a Printer for the given format string, defaulting to table.
@@ -65,27 +88,27 @@ func (p *Printer) Table(headers []string, rows [][]string) {
 		_ = enc.Encode(records)
 	case FormatPlain:
 		for _, row := range rows {
-			fmt.Fprintln(p.Out, strings.Join(row, "\t"))
+			safeFprintln(p.Out, strings.Join(row, "\t"))
 		}
 	default: // table
 		w := tabwriter.NewWriter(p.Out, 0, 0, 2, ' ', 0)
-		fmt.Fprintln(w, strings.Join(headers, "\t"))
-		fmt.Fprintln(w, strings.Repeat("-", 80))
+		safeFprintln(w, strings.Join(headers, "\t"))
+		safeFprintln(w, strings.Repeat("-", 80))
 		for _, row := range rows {
-			fmt.Fprintln(w, strings.Join(row, "\t"))
+			safeFprintln(w, strings.Join(row, "\t"))
 		}
-		w.Flush()
+		safeFlush(w)
 	}
 }
 
 // Line prints a single formatted line.
 func (p *Printer) Line(format string, args ...interface{}) {
-	fmt.Fprintf(p.Out, format+"\n", args...)
+	safeFprintf(p.Out, format+"\n", args...)
 }
 
 // Success prints a success message (always to stdout regardless of format).
 func (p *Printer) Success(format string, args ...interface{}) {
-	fmt.Fprintf(p.Out, "✓ "+format+"\n", args...)
+	safeFprintf(p.Out, "✓ "+format+"\n", args...)
 }
 
 // Truncate shortens a string to maxLen, adding "…" if needed.

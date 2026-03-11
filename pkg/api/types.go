@@ -5,31 +5,31 @@ package api
 
 // ShortURL represents a Shlink short URL resource.
 type ShortURL struct {
-	ShortCode   string            `json:"shortCode"`
-	ShortURL    string            `json:"shortUrl"`
-	LongURL     string            `json:"longUrl"`
-	DateCreated string            `json:"dateCreated"`
-	Tags        []string          `json:"tags"`
-	Meta        ShortURLMeta      `json:"meta"`
-	Domain      *string           `json:"domain"`
-	Title       *string           `json:"title"`
-	Crawlable   bool              `json:"crawlable"`
-	ForwardQuery bool             `json:"forwardQuery"`
-	VisitsSummary VisitsSummary   `json:"visitsSummary"`
+	ShortCode     string        `json:"shortCode"`
+	ShortURL      string        `json:"shortUrl"`
+	LongURL       string        `json:"longUrl"`
+	DateCreated   string        `json:"dateCreated"`
+	Tags          []string      `json:"tags"`
+	Meta          ShortURLMeta  `json:"meta"`
+	Domain        *string       `json:"domain"`
+	Title         *string       `json:"title"`
+	Crawlable     bool          `json:"crawlable"`
+	ForwardQuery  bool          `json:"forwardQuery"`
+	VisitsSummary VisitsSummary `json:"visitsSummary"`
 }
 
 // VisitsSummary holds visit counts for a short URL.
 type VisitsSummary struct {
-	Total        int `json:"total"`
-	NonBots      int `json:"nonBots"`
-	Bots         int `json:"bots"`
+	Total   int `json:"total"`
+	NonBots int `json:"nonBots"`
+	Bots    int `json:"bots"`
 }
 
 // ShortURLMeta holds optional metadata for a short URL.
 type ShortURLMeta struct {
-	ValidSince  *string `json:"validSince"`
-	ValidUntil  *string `json:"validUntil"`
-	MaxVisits   *int    `json:"maxVisits"`
+	ValidSince *string `json:"validSince"`
+	ValidUntil *string `json:"validUntil"`
+	MaxVisits  *int    `json:"maxVisits"`
 }
 
 // ShortURLList is the paginated list response for short URLs.
@@ -45,38 +45,38 @@ type ShortURLPage struct {
 
 // Pagination holds paging metadata.
 type Pagination struct {
-	CurrentPage  int `json:"currentPage"`
-	PagesCount   int `json:"pagesCount"`
-	ItemsPerPage int `json:"itemsPerPage"`
+	CurrentPage        int `json:"currentPage"`
+	PagesCount         int `json:"pagesCount"`
+	ItemsPerPage       int `json:"itemsPerPage"`
 	ItemsInCurrentPage int `json:"itemsInCurrentPage"`
-	TotalItems   int `json:"totalItems"`
+	TotalItems         int `json:"totalItems"`
 }
 
 // CreateShortURLRequest is the body for creating a short URL.
 type CreateShortURLRequest struct {
-	LongURL     string   `json:"longUrl"`
-	ShortCode   string   `json:"customSlug,omitempty"`
-	Title       string   `json:"title,omitempty"`
-	Tags        []string `json:"tags,omitempty"`
-	Domain      string   `json:"domain,omitempty"`
-	MaxVisits   *int     `json:"maxVisits,omitempty"`
-	ValidSince  string   `json:"validSince,omitempty"`
-	ValidUntil  string   `json:"validUntil,omitempty"`
-	Crawlable   *bool    `json:"crawlable,omitempty"`
-	ForwardQuery *bool   `json:"forwardQuery,omitempty"`
-	FindIfExists bool    `json:"findIfExists,omitempty"`
+	LongURL      string   `json:"longUrl"`
+	ShortCode    string   `json:"customSlug,omitempty"`
+	Title        string   `json:"title,omitempty"`
+	Tags         []string `json:"tags,omitempty"`
+	Domain       string   `json:"domain,omitempty"`
+	MaxVisits    *int     `json:"maxVisits,omitempty"`
+	ValidSince   string   `json:"validSince,omitempty"`
+	ValidUntil   string   `json:"validUntil,omitempty"`
+	Crawlable    *bool    `json:"crawlable,omitempty"`
+	ForwardQuery *bool    `json:"forwardQuery,omitempty"`
+	FindIfExists bool     `json:"findIfExists,omitempty"`
 }
 
 // EditShortURLRequest is the body for editing a short URL.
 type EditShortURLRequest struct {
-	LongURL     string   `json:"longUrl,omitempty"`
-	Title       *string  `json:"title,omitempty"`
-	Tags        []string `json:"tags,omitempty"`
-	MaxVisits   *int     `json:"maxVisits,omitempty"`
-	ValidSince  *string  `json:"validSince,omitempty"`
-	ValidUntil  *string  `json:"validUntil,omitempty"`
-	Crawlable   *bool    `json:"crawlable,omitempty"`
-	ForwardQuery *bool   `json:"forwardQuery,omitempty"`
+	LongURL      string   `json:"longUrl,omitempty"`
+	Title        *string  `json:"title,omitempty"`
+	Tags         []string `json:"tags,omitempty"`
+	MaxVisits    *int     `json:"maxVisits,omitempty"`
+	ValidSince   *string  `json:"validSince,omitempty"`
+	ValidUntil   *string  `json:"validUntil,omitempty"`
+	Crawlable    *bool    `json:"crawlable,omitempty"`
+	ForwardQuery *bool    `json:"forwardQuery,omitempty"`
 }
 
 // ---- Tags ----
@@ -104,9 +104,9 @@ type TagStatsData struct {
 
 // TagStat holds statistics for a single tag.
 type TagStat struct {
-	Tag             string        `json:"tag"`
-	ShortURLsCount  int           `json:"shortUrlsCount"`
-	VisitsSummary   VisitsSummary `json:"visitsSummary"`
+	Tag            string        `json:"tag"`
+	ShortURLsCount int           `json:"shortUrlsCount"`
+	VisitsSummary  VisitsSummary `json:"visitsSummary"`
 }
 
 // RenameTagRequest renames a tag.
@@ -130,13 +130,13 @@ type VisitPage struct {
 
 // Visit represents a single visit record.
 type Visit struct {
-	Referer   string      `json:"referer"`
-	Date      string      `json:"date"`
-	UserAgent string      `json:"userAgent"`
+	Referer       string    `json:"referer"`
+	Date          string    `json:"date"`
+	UserAgent     string    `json:"userAgent"`
 	VisitLocation *Location `json:"visitLocation"`
-	PotentialBot bool     `json:"potentialBot"`
-	VisitedURL string     `json:"visitedUrl"`
-	Type      string      `json:"type"`
+	PotentialBot  bool      `json:"potentialBot"`
+	VisitedURL    string    `json:"visitedUrl"`
+	Type          string    `json:"type"`
 }
 
 // Location holds geographic visit data.
@@ -166,14 +166,14 @@ type DomainList struct {
 
 // DomainData holds domain entries and a default redirect set.
 type DomainData struct {
-	Data            []Domain        `json:"data"`
+	Data             []Domain         `json:"data"`
 	DefaultRedirects *DomainRedirects `json:"defaultRedirects"`
 }
 
 // Domain represents a configured domain.
 type Domain struct {
-	Domain    string          `json:"domain"`
-	IsDefault bool            `json:"isDefault"`
+	Domain    string           `json:"domain"`
+	IsDefault bool             `json:"isDefault"`
 	Redirects *DomainRedirects `json:"redirects"`
 }
 
@@ -191,7 +191,7 @@ type Health struct {
 	Status  string `json:"status"`
 	Version string `json:"version"`
 	Links   struct {
-		About string `json:"about"`
+		About   string `json:"about"`
 		Project string `json:"project"`
 	} `json:"links"`
 }
@@ -212,7 +212,7 @@ type RedirectRule struct {
 
 // RedirectCondition is a single condition in a redirect rule.
 type RedirectCondition struct {
-	Type     string `json:"type"`
-	MatchKey string `json:"matchKey"`
+	Type       string `json:"type"`
+	MatchKey   string `json:"matchKey"`
 	MatchValue string `json:"matchValue"`
 }

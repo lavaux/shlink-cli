@@ -1,36 +1,40 @@
+version: "2"
 run:
-  timeout: 5m
   go: "1.22"
-
 linters:
   enable:
-    - errcheck
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - unused
-    - gofmt
-    - goimports
+    - bodyclose
     - misspell
+    - noctx
     - revive
     - unconvert
     - unparam
-    - bodyclose
-    - noctx
-    - exportloopref
-
-linters-settings:
-  goimports:
-    local-prefixes: github.com/yourorg/shlink-cli
-
-  revive:
-    rules:
-      - name: exported
-        arguments:
-          - "checkPrivateReceivers"
-
+  settings:
+    revive:
+      rules:
+        - name: exported
+          arguments:
+            - checkPrivateReceivers
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
 issues:
-  exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/lavaux/shlink-cli
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
