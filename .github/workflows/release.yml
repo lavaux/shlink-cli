@@ -73,9 +73,9 @@ jobs:
           ASSET="shlink_${{ matrix.goos }}_${{ matrix.goarch }}${EXT}"
           go build \
             -ldflags "-s -w \
-              -X 'github.com/yourorg/shlink-cli/internal/config.Version=${{ steps.vars.outputs.version }}' \
-              -X 'github.com/yourorg/shlink-cli/internal/config.Commit=${{ steps.vars.outputs.commit }}' \
-              -X 'github.com/yourorg/shlink-cli/internal/config.BuildDate=${{ steps.vars.outputs.date }}'" \
+              -X 'github.com/lavaux/shlink-cli/internal/config.Version=${{ steps.vars.outputs.version }}' \
+              -X 'github.com/lavaux/shlink-cli/internal/config.Commit=${{ steps.vars.outputs.commit }}' \
+              -X 'github.com/lavaux/shlink-cli/internal/config.BuildDate=${{ steps.vars.outputs.date }}'" \
             -o "$ASSET" \
             ./cmd/shlink
           echo "ASSET=$ASSET" >> "$GITHUB_ENV"
